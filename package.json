@@ -12,7 +12,8 @@
     "test-ui-auth": "npx playwright test profile-stored-auth-multi-role-example.spec.ts --project=chromium-auth ",
     "test-vrt": "npx playwright test visual-regression.spec.ts --project=chromium",
     "test-swag-auth": "npx playwright test API-auth-swag.spec.ts --project=chromium-auth",
-    "test-swag-auth-multi": "npx playwright test swag-profile-stored-multi-role.spec.ts --project=chromium-auth"
+    "test-swag-auth-multi": "npx playwright test swag-profile-stored-multi-role.spec.ts --project=chromium-auth",
+    "form-page-test": "npx playwright test forms-page-test.spec.ts --project=chromium-auth "
   },
   "keywords": [],
   "author": "",
