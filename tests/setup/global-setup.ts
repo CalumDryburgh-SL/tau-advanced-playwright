@@ -1,16 +1,16 @@
-import { chromium, FullConfig } from '@playwright/test';
-import LoginPage from '../ui/pages/login-page';
-import uiPages from '../utils/uiPages';
+import { chromium, firefox, FullConfig } from "@playwright/test";
+import LoginPage from "../ui/pages/login-page";
+import uiPages from "../utils/uiPages";
 
 async function globalSetup(config: FullConfig) {
   const user = process.env.USERNAME!;
   const password = process.env.PASSWORD!;
   const { baseURL, storageState } = config.projects[0].use;
-  const browser = await chromium.launch({ headless: true, timeout: 10000 });
+  const browser = await chromium.launch({ headless: false, timeout: 10000 });
   const page = await browser.newPage();
   const loginPage = new LoginPage(page);
 
-  await page.goto(baseURL+uiPages.login);
+  await page.goto(baseURL + uiPages.login);
   await loginPage.doLogin(user, password);
   await loginPage.checkLoggedIn();
   await page.context().storageState({ path: storageState as string });

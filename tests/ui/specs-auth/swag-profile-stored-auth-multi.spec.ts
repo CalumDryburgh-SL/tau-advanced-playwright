@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import ProfilePage from "../pages/profile-page";
+import ProfilePage from "../pages/SwagInventory";
 import pages from "../../utils/pages";
 
 let profilePage: ProfilePage;
@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto(pages.profile);
 });
 
-test.describe.skip("Book Store Application - Profile - Admin", () => {
+test.describe.only("normal and admin user", () => {
   test("admin and user", async ({ browser }) => {
     const adminContext = await browser.newContext({
       storageState: ".auth/admin.json",
@@ -22,7 +22,7 @@ test.describe.skip("Book Store Application - Profile - Admin", () => {
     });
     const userPage = await userContext.newPage();
     profilePage = new ProfilePage(userPage);
-    await profilePage.checkLoggedInUser();
+    await profilePage.checkLoggedInNormalUser();
 
     await adminContext.close();
     await userContext.close();
