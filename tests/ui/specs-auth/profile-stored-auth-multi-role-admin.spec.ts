@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe.skip("Book Store Application - Profile - Admin", () => {
-  // test.use({ storageState: '.auth/admin.json' });
+  //test.use({ storageState: '.auth/admin.json' });
   test("Sort books - admin", async ({ page }) => {
     profilePage = new ProfilePage(page);
     await profilePage.checkLoggedInAdmin();

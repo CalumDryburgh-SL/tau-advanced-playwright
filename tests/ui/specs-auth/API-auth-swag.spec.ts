@@ -1,12 +1,9 @@
 import { expect, test } from "@playwright/test";
-import InventoryPageSauceDemo from "../pages/swagLogin";
+import InventoryPageSauce from "../pages/swagLogin";
 
-const userName = process.env.SWAGUSER!;
-const password = process.env.SWAGPASS!;
 const URL = process.env.SWAGURL!;
-const targetURL = process.env.INVURL!;
 
-let inventoryPage: InventoryPageSauceDemo;
+let inventoryPage: InventoryPageSauce;
 
 test.use({ storageState: ".auth/user.json" });
 
@@ -17,7 +14,7 @@ test.beforeEach(async ({ page }) => {
 test.describe.skip("swag - Profile", () => {
   test.use({ storageState: ".auth/user.json" });
   test("Check log in", async ({ page }) => {
-    inventoryPage = new InventoryPageSauceDemo(page);
+    inventoryPage = new InventoryPageSauce(page);
     await inventoryPage.checkLoggedIn();
   });
 });
