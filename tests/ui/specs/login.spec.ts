@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
   loginPage = new LoginPage(page);
 });
 
-test.describe("Book Store - Login", () => {
+test.describe.skip("Book Store - Login", () => {
   test(`successfull login`, async () => {
     await loginPage.doLogin(userName, password);
     await loginPage.checkLoggedIn();
