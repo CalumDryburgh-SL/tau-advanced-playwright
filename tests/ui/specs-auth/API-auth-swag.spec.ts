@@ -5,7 +5,7 @@ const URL = process.env.SWAGURL!;
 
 let inventoryPage: InventoryPageSauce;
 
-test.use({ storageState: ".auth/user.json" });
+test.use({ storageState: ".auth/user.json " });
 
 test.beforeEach(async ({ page }) => {
   await page.goto(URL);
