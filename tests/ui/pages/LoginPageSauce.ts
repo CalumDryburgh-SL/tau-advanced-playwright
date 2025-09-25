@@ -1,6 +1,6 @@
 import { type Page, type Locator, expect } from "@playwright/test";
 
-class LoginPageSauceDemo {
+class LoginPageSauce {
   readonly page: Page;
   readonly loginButton: Locator;
   readonly messagePanel: Locator;
@@ -39,4 +39,4 @@ class LoginPageSauceDemo {
   }
 }
 
-export default LoginPageSauceDemo;
+export default LoginPageSauce;

@@ -1,12 +1,13 @@
-import { Page } from '@playwright/test';
-import { buildUrl } from './uiUrlBuilder';
-import BookPage from '../ui/pages/book-page';
-import LoginPage from '../ui/pages/login-page';
-import ProfilePage from '../ui/pages/profile-page';
+import { Page } from "@playwright/test";
+import { buildUrl } from "./uiUrlBuilder";
+import BookPage from "../ui/pages/book-page";
+import LoginPage from "../ui/pages/login-page";
+import ProfilePage from "../ui/pages/profile-page";
+import FormPage from "../ui/pages/form-page";
 
 async function beforeEach(
   page: Page,
-  PageObjectParam: LoginPage|BookPage|ProfilePage,
+  PageObjectParam: LoginPage | BookPage | ProfilePage | FormPage,
   targetPage: string,
   params?: Record<any, any>
 ) {

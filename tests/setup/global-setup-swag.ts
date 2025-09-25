@@ -1,4 +1,5 @@
 import { expect, chromium, FullConfig } from "@playwright/test";
+import LoginPageSauce from "../ui/pages/LoginPageSauce";
 
 const userName = process.env.SWAGUSER!;
 const password = process.env.SWAGPASS!;
@@ -12,14 +13,10 @@ async function globalSetup(config: FullConfig) {
   const page = await context.newPage();
   try {
     await context.tracing.start({ screenshots: true, snapshots: true });
+    const loginPage = new LoginPageSauce(page);
     await page.goto(URL);
-    const usernameField = page.getByPlaceholder("Username");
-    const passwordField = page.getByPlaceholder("Password");
-    const signInButton = page.getByRole("button", { name: "Login" });
-
-    await usernameField.fill(userName);
-    await passwordField.fill(password);
-    await signInButton.click();
+    await loginPage.doLogin(userName, password);
+    await loginPage.checkLoggedIn();
 
     expect(page.url()).toBe(targetURL);
     await page.context().storageState({ path: storageState as string });

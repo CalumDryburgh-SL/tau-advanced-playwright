@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 
-class InventoryPageSauceDemo {
+class InventoryPageSauce {
   readonly page: Page;
   readonly firstInventoryImage: Locator;
   readonly secondInventoryImage: Locator;
@@ -27,4 +27,4 @@ class InventoryPageSauceDemo {
   }
 }
 
-export default InventoryPageSauceDemo;
+export default InventoryPageSauce;

@@ -4,7 +4,7 @@ import baseEnvUrl from "./tests/utils/environmentBaseUrl";
 require("dotenv").config({ path: "./.env", override: true });
 
 export default defineConfig({
-  globalSetup: require.resolve("./tests/setup/global-setup-swag"),
+  globalSetup: require.resolve("./tests/setup/global-setup"),
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: 1,

@@ -1,5 +1,5 @@
 import { APIRequestContext, test as setup, type Page } from "@playwright/test";
-import LoginPageSauceDemo from "../ui/pages/swagLogin";
+import LoginPageSauceDemo from "../ui/pages/LoginPageSauce";
 
 const userName = process.env.SWAGUSER!;
 const password = process.env.SWAGPASS!;
@@ -40,7 +40,7 @@ setup("authenticate admin", async ({ request }) => {
       password: password,
     },
   });
-  await request.storageState({ path: standardUserFile });
+  await request.storageState({ path: adminUserFile });
 });
 
 async function doLogin(page: Page, user: string, password: string) {
