@@ -51,6 +51,7 @@ test.describe("Books - Fixture & API", () => {
       isbn
     );
 
+    console.log(response);
     // Verify that book was deleted
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(204);
@@ -59,6 +60,7 @@ test.describe("Books - Fixture & API", () => {
 
   test("add book to collection then delete it", async ({ page }) => {
     const isbn = userData.books.new;
+    const isbn2 = "9781449325862";
 
     // Book collections clean up
     const deleteAllResponse = await deleteBookAPIRequest.deleteAllBooksByUser(
@@ -69,6 +71,10 @@ test.describe("Books - Fixture & API", () => {
 
     // Add book to collection and verify that book was added
     await addBook(userId, page, isbn);
+
+    await addBook(userId, page, isbn2);
+
+    console.log(isbn);
 
     // Delete book from collection and verify that book was deleted
     await deleteBook(userId, page, isbn);
