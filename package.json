@@ -15,7 +15,8 @@
     "test-swag-auth-multi": "npx playwright test swag-profile-stored-multi-role.spec.ts --project=chromium-auth",
     "form-page-test": "npx playwright test forms-page-test.spec.ts --project=chromium-auth ",
     "book-page-search": "npx playwright test bookSearch.spec.ts --project=chromium-auth",
-    "book-store-page": "npx playwright test book-store-search.spec.ts --project=chromium-auth"
+    "book-store-page": "npx playwright test book-store-search.spec.ts --project=chromium-auth",
+    "delete-book-collection": "npx playwright test Add-remove-test.spec.ts --project=chromium"
   },
   "keywords": [],
   "author": "",
