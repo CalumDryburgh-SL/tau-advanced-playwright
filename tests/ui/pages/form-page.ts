@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
+import formData from "../../data/form-data";
 
 class FormPage {
   readonly page: Page;
@@ -8,6 +9,7 @@ class FormPage {
   readonly mobile: Locator;
   readonly submit: Locator;
   readonly dialogbox: Locator;
+  readonly formDataRequest: RegExp;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +19,7 @@ class FormPage {
     this.mobile = page.getByPlaceholder("Mobile Number");
     this.submit = page.getByRole("button", { name: "Submit" });
     this.dialogbox = page.locator("#example-modal-sizes-title-lg");
+    // this.formDataRequest = new RegExp();
   }
   async fillFirstName(firstName: string) {
     await this.firstName.fill(firstName);
@@ -35,10 +38,11 @@ class FormPage {
   }
 
   async doForm(firstName, lastName, mobile) {
-    await this.fillFirstName(firstName);
-    await this.fillLastName(lastName);
+    JSON.stringify({ ...formData });
+    await this.fillFirstName(formData.account.firstName);
+    await this.fillLastName(formData.account.lastName);
     await this.fillGender();
-    await this.fillMobile(mobile);
+    await this.fillMobile(formData.account.mobileNumber);
     await this.submit.click();
   }
 
