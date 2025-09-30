@@ -27,7 +27,7 @@ async function deleteBookAPIByIsbn(
 ) {
   const method = methods.delete;
   const requestOptions = { data: { isbn: isbn, userId: userId } };
-  const requestUrl = buildUrl(endpoints.book.delete, userId);
+  const requestUrl = buildUrl(endpoints.books.delete, userId);
   const response = await executeRequest(
     apiContext,
     requestUrl,
