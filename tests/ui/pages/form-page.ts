@@ -37,12 +37,19 @@ class FormPage {
     await this.mobile.fill(mobile);
   }
 
-  async doForm(firstName, lastName, mobile) {
-    JSON.stringify({ ...formData });
-    await this.fillFirstName(formData.account.firstName);
-    await this.fillLastName(formData.account.lastName);
+  // async doForm() {
+  //   JSON.stringify({ ...formData });
+  //   await this.fillFirstName(formData.account.firstName);
+  //   await this.fillLastName(formData.account.lastName);
+  //   await this.fillGender();
+  //   await this.fillMobile(formData.account.mobileNumber);
+  //   await this.submit.click();
+  // }
+  async doForm(firstName: string, lastName: string, mobile: string) {
+    await this.fillFirstName(firstName);
+    await this.fillLastName(lastName);
     await this.fillGender();
-    await this.fillMobile(formData.account.mobileNumber);
+    await this.fillMobile(mobile);
     await this.submit.click();
   }
 
