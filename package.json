@@ -16,7 +16,9 @@
     "form-page-test": "npx playwright test forms-page-test.spec.ts --project=chromium",
     "book-page-search": "npx playwright test bookSearch.spec.ts --project=chromium-auth",
     "book-store-page": "npx playwright test book-store-search.spec.ts --project=chromium-auth",
-    "delete-book-collection": "npx playwright test Add-remove-test.spec.ts --project=chromium"
+    "delete-book-collection": "npx playwright test Add-remove-test.spec.ts --project=chromium",
+    "intercept": "npx playwright test book-store-interception.spec.ts ",
+    "intercept2": "npx playwright test profile-api-interception.spec.ts"
   },
   "keywords": [],
   "author": "",
