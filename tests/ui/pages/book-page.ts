@@ -1,7 +1,14 @@
-import { type Page, type Locator, expect } from "@playwright/test";
+import {
+  type Page,
+  type Locator,
+  expect,
+  BrowserContext,
+} from "@playwright/test";
 import { buildUrl } from "../../utils/uiUrlBuilder";
 import messages from "../../utils/messages";
 import pages from "../../utils/pages";
+
+import bookListData from "../../data/book-list-data";
 
 class BookPage {
   readonly page: Page;
@@ -11,13 +18,19 @@ class BookPage {
   readonly speakingJSBook: Locator;
   readonly speakingJSBookIsbnLabel: Locator;
   readonly titleLabel: Locator;
+  readonly booksCollectionRequestRegExp: RegExp;
 
   readonly searchBox: Locator;
   readonly bookResults: Locator;
   readonly noResultsMessage: Locator;
   readonly bookTitles: Locator;
 
+  readonly FirstBook: Locator;
+  readonly SecondBook: Locator;
+
   constructor(page: Page) {
+    this.FirstBook = page.locator("rt-td").nth(0);
+    this.SecondBook = page.locator("rt-td").nth(1);
     this.page = page;
     this.searchBox = page.locator("#searchBox");
     this.bookResults = page.locator(
@@ -41,6 +54,15 @@ class BookPage {
   async search(searchTerm: string) {
     await this.searchBox.fill(searchTerm);
     await this.page.waitForTimeout(500);
+  }
+
+  async checkSortedByTitle() {
+    await expect(this.FirstBook).toHaveText(
+      "Designing Evolvable Web APIs with ASP.NET"
+    );
+    await expect(this.SecondBook).toHaveText(
+      "Learning JavaScript Design Patterns"
+    );
   }
 
   async clearSearch() {
@@ -132,6 +154,14 @@ class BookPage {
       expect(dialogMessage).toBe(expectedDialogMessage);
       await dialog.accept();
     });
+  }
+
+  async mockBooksListResponse(context: BrowserContext) {
+    await context.route(this.booksCollectionRequestRegExp, (route) =>
+      route.fulfill({
+        body: JSON.stringify({ ...bookListData }),
+      })
+    );
   }
 }
 

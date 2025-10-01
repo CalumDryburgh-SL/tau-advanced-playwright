@@ -1,5 +1,5 @@
-import { type Page, type Locator , expect } from '@playwright/test';
-import messages from '../../utils/messages';
+import { type Page, type Locator, expect } from "@playwright/test";
+import messages from "../../utils/messages";
 
 class LoginPage {
   readonly page: Page;
@@ -10,10 +10,10 @@ class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.loginButton = page.getByRole('button', { name: 'Login' });
-    this.messagePanel = page.locator('#output');
-    this.password = page.getByPlaceholder('Password');
-    this.userName = page.getByPlaceholder('UserName');
+    this.loginButton = page.getByRole("button", { name: "Login" });
+    this.messagePanel = page.locator("#output");
+    this.password = page.getByPlaceholder("Password");
+    this.userName = page.getByPlaceholder("UserName");
   }
 
   async fillEmail(email: string) {
