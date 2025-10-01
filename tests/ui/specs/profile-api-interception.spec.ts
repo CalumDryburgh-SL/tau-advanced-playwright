@@ -13,46 +13,28 @@ let profilePage: ProfilePage;
 let eyes: Eyes;
 
 test.beforeAll(async () => {
-  // Initialize
   eyes = new Eyes();
 
-  // Configure Eyes
   const configuration = new Configuration();
   configuration.setApiKey(process.env.APPLITOOLS_API_KEY!);
   configuration.setAppName("DemoQA BookStore");
-  configuration.setTestName("Profile API Interception Test");
 
-  // Timestamp
-  const batchInfo = new BatchInfo(
-    `Profile API Interception Batch - ${new Date().toISOString()}`
-  );
-  batchInfo.setId(process.env.APPLITOOLS_BATCH_ID || `batch-${Date.now()}`);
+  const batchInfo = new BatchInfo("Profile API Interception Batch");
   configuration.setBatch(batchInfo);
 
-  // config
-  configuration.setMatchLevel("Strict");
-  configuration.setIgnoreDisplacements(true);
-  configuration.setUseDom(true);
-  configuration.setEnablePatterns(true);
-
-  // viewport size
   configuration.setViewportSize({ width: 1280, height: 720 });
 
   eyes.setConfiguration(configuration);
 });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(pages.profile);
+  await page.goto("https://demoqa.com/profile");
   profilePage = new ProfilePage(page);
 });
 
 test.afterAll(async () => {
-  // Close Eyes and get results
-  if (eyes) {
-    await eyes.closeAsync();
-    const results = await eyes.getRunner().getAllTestResults();
-    console.log("Applitools test results:", results);
-  }
+  await eyes.closeAsync();
+  console.log("Eyes tests completed. Check Applitools dashboard for results.");
 });
 
 test.describe("Profile - API Interception with Applitools", () => {
@@ -83,21 +65,15 @@ async function watchAPICallAndMockResponse(
   page: Page,
   context: BrowserContext
 ) {
-  try {
-    await profilePage.mockBooksListResponse(context);
-    const [response] = await Promise.all([
-      page.waitForResponse(new RegExp(apiPaths.account)),
-      page.reload(),
-    ]);
-    const responseData = await response.json();
-    console.log("API Response received:", responseData);
+  await profilePage.mockBooksListResponse(context);
+  const [response] = await Promise.all([
+    page.waitForResponse(new RegExp(apiPaths.account)),
+    page.reload(),
+  ]);
+  const responseData = await response.json();
+  console.log("API Response received:", responseData);
 
-    // Wait for page to stabilize after API response
-    await page.waitForTimeout(1000);
+  await page.waitForTimeout(1000);
 
-    return responseData;
-  } catch (error) {
-    console.error("Error in API interception:", error);
-    throw error;
-  }
+  return responseData;
 }
